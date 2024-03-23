@@ -1,8 +1,8 @@
-﻿using Task_Board.ViewModels;
-
-namespace Task_Board
+﻿namespace Task_Board
 {
     using Microsoft.Extensions.Logging;
+
+    using ViewModels;
 
     public static class MauiProgram
     {
@@ -17,8 +17,13 @@ namespace Task_Board
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<MainViewModel>();
+
+            builder.Services.AddTransient<DetailPage>();
+            builder.Services.AddTransient<DetailViewModel>();
 
 #if DEBUG
     		builder.Logging.AddDebug();
